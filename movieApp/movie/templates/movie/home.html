@@ -1,0 +1,25 @@
+{% extends 'movie/main.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main">
+        {% for movie in movies %}
+            <div class="container">
+              <div class="movie">
+                  <a href="/movie/{{movie.slug}}"><img src="{{movie.imageURL}}" alt="{{movie.title}}"></a>
+              </div>
+              <div class="movie-info">
+                  <a href="/movie/{{movie.slug}}">{{movie.title}}</a>
+                  <div class="like-rate">
+                      <span>{{ movie.rating }}</span>
+                      {% if user.is_authenticated %}
+                      <i id="add" class="fa-regular fa-heart like" data-id="{{movie.id}}"></i>
+                      {% else %}
+                      <a id="aaa" href="http://127.0.0.1:8000/login/"><i class="fa-regular fa-heart" data-id="{{movie.id}}"></i></a>
+                      {% endif %}
+                  </div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
